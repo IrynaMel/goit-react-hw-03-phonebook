@@ -18,6 +18,18 @@ class App extends React.Component {
     filter: '',
   };
 
+  componentDidUpdate (prevState){
+    if (this.state.contacts !== prevState.contacts){
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+  };
+
+  componentDidMount(){
+    const contact = localStorage.getItem('contacts')
+    const parsedContact = JSON.parse(contact);
+    this.setState({ contacts: parsedContact})
+  }
+
   onFilter = e => {
     this.setState({ filter: e.currentTarget.value });
   };
