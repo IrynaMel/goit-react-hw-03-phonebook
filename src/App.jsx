@@ -27,7 +27,8 @@ class App extends React.Component {
   componentDidMount(){
     const contact = localStorage.getItem('contacts')
     const parsedContact = JSON.parse(contact);
-    this.setState({ contacts: parsedContact})
+    if(parsedContact){
+    this.setState({ contacts: parsedContact})}
   }
 
   onFilter = e => {
@@ -65,10 +66,15 @@ class App extends React.Component {
     }));
   };
 
+  // filterContacts = ()=>{
+  //   return 
+
+  // }
+
   render = () => {
-    const visibleContact = this.state.contacts.filter(el =>
+    const visibleContact =this.state.contacts.filter(el =>
       el.name.toLowerCase().includes(this.state.filter.toLowerCase())
-    );
+      )
 
     return (
       <Container>
